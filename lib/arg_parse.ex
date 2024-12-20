@@ -1,33 +1,25 @@
 defmodule ArgParse do
-  defmacro args(specification) do
-    spec = convert(specification)
-
-    quote do
-      def specification(), do: unquote(spec)
-    end
+  def to_erl({kw, meta, args}) do
+    {kw, meta, to_erl(args)}
   end
 
-  def convert({kw, meta, args}) do
-    {kw, meta, convert(args)}
+  def to_erl({key, val}) do
+    {key, to_erl(val)}
   end
 
-  def convert({key, val}) do
-    {key, convert(val)}
+  def to_erl(args) when is_list(args) do
+    Enum.map(args, &to_erl/1)
   end
 
-  def convert(args) when is_list(args) do
-    Enum.map(args, &convert/1)
-  end
-
-  def convert(args) when is_map(args) do
+  def to_erl(args) when is_map(args) do
     for {k, v} <- args, into: %{} do
-      {k, convert(v)}
+      {k, to_erl(v)}
     end
   end
 
-  def convert(args) when is_binary(args) do
+  def to_erl(args) when is_binary(args) do
     String.to_charlist(args)
   end
 
-  def convert(args), do: args
+  def to_erl(args), do: args
 end

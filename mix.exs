@@ -1,13 +1,16 @@
 defmodule ArgParse.MixProject do
   use Mix.Project
 
+  @repo_url "https://github.com/paytonward6/argparse_ex"
+
   def project do
     [
       app: :argparse_ex,
       version: "0.1.0",
-      elixir: "~> 1.18",
+      elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -21,8 +24,16 @@ defmodule ArgParse.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:spark, "~> 2.2.0"},
+      {:igniter, "~> 0.5", only: [:dev, :test]}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Payton Ward"],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => @repo_url}
     ]
   end
 end
