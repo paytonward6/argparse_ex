@@ -10,7 +10,9 @@ defmodule ArgParse.MixProject do
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      package: package()
+
+      package: package(),
+      description: description()
     ]
   end
 
@@ -27,6 +29,10 @@ defmodule ArgParse.MixProject do
       {:spark, "~> 2.2.0"},
       {:igniter, "~> 0.5", only: [:dev, :test]}
     ]
+  end
+
+  defp description do
+    "Elixir wrapper for Erlang's `:argparse` module"
   end
 
   defp package do
