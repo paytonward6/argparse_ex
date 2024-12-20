@@ -27,7 +27,8 @@ defmodule ArgParse.MixProject do
   defp deps do
     [
       {:spark, "~> 2.2.0"},
-      {:igniter, "~> 0.5", only: [:dev, :test]}
+      {:igniter, "~> 0.5", only: [:dev, :test]},
+      {:ex_doc, ">= 0.35.0", only: :dev},
     ]
   end
 
